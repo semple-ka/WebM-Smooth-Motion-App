@@ -103,6 +103,13 @@ app.get('/api/download/:id/:filename', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+
+// Export for Vercel
+module.exports = app;
+
+// Only listen if not running as a Vercel function
+if (process.env.VERCEL !== '1') {
+    server.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
+}
