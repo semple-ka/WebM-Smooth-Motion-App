@@ -6,8 +6,8 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 
-const { ensureDirExists } = require('./utils');
-const processor = require('./processor');
+const { ensureDirExists } = require('../utils');
+const processor = require('../processor');
 
 const app = express();
 const server = http.createServer(app);
@@ -44,7 +44,7 @@ const upload = multer({
 });
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(process.cwd(), 'public')));
 app.use(express.json());
 
 // Pass io to processor
