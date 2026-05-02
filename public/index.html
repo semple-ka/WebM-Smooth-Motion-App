@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebM Smooth Motion Engine</title>
+    <meta name="description" content="A powerful WebM frame interpolation tool using FFmpeg and AI.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Smooth Motion Engine</h1>
+            <p>Upscale WebM frame rates for silky smooth playback</p>
+        </header>
+
+        <main class="glass-panel">
+            <section class="upload-section" id="uploadZone">
+                <div class="upload-content">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                    </svg>
+                    <h2>Drag & Drop WebM Video</h2>
+                    <p>or click to browse</p>
+                    <input type="file" id="fileInput" accept="video/webm, video/mp4" hidden>
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h3>Processing Settings</h3>
+                <div class="settings-grid">
+                    <div class="setting-group">
+                        <label for="targetFps">Target FPS</label>
+                        <select id="targetFps">
+                            <option value="60" selected>60 FPS (Smooth)</option>
+                            <option value="120">120 FPS (Ultra Smooth)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="quality">Output Quality</label>
+                        <select id="quality">
+                            <option value="high" selected>High (Larger File)</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low (Faster Processing)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="outputFormat">Output Format</label>
+                        <select id="outputFormat">
+                            <option value="mp4" selected>MP4 (Universal)</option>
+                            <option value="webm">WebM (Web Native)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="mode">Interpolation Mode</label>
+                        <select id="mode">
+                            <option value="basic" selected>Basic (FFmpeg)</option>
+                            <option value="advanced">Advanced (AI RIFE - Requires Setup)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="processBtn" class="primary-btn" disabled>
+                    <span class="btn-text">Process Video</span>
+                    <div class="loader hidden"></div>
+                </button>
+            </section>
+
+            <section class="status-section hidden" id="statusSection">
+                <div class="status-header">
+                    <h3 id="statusText">Processing...</h3>
+                    <span id="progressText">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </section>
+
+            <section class="results-section hidden" id="resultsSection">
+                <h3>Outputs Ready</h3>
+                <div class="outputs-list" id="outputsList">
+                    <!-- Dynamic output links will be appended here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
