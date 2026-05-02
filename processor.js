@@ -65,7 +65,8 @@ const processNext = async () => {
 
 const processBasic = async (job) => {
     const { id, inputPath, targetFps, quality, outputFormat } = job;
-    const outDir = path.join(__dirname, 'outputs');
+    const isVercel = process.env.VERCEL === '1';
+    const outDir = isVercel ? '/tmp/outputs' : path.join(__dirname, 'outputs');
     ensureDirExists(outDir);
 
     // If we want multiple outputs, let's define the configs here.

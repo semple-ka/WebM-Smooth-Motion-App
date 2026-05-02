@@ -17,9 +17,10 @@ const io = new Server(server, {
     }
 });
 
-// Setup paths
-const uploadsDir = path.join(__dirname, 'uploads');
-const outputsDir = path.join(__dirname, 'outputs');
+// Setup paths - Use /tmp for Vercel environment compatibility
+const isVercel = process.env.VERCEL === '1';
+const uploadsDir = isVercel ? '/tmp/uploads' : path.join(__dirname, 'uploads');
+const outputsDir = isVercel ? '/tmp/outputs' : path.join(__dirname, 'outputs');
 ensureDirExists(uploadsDir);
 ensureDirExists(outputsDir);
 
